@@ -272,15 +272,18 @@ export default class HomePage extends Component {
       <div className="MainContainer">
         <div className="SubContainer">
           <div className="flex-Container">
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<AddIcon />}
-              onClick={this.handleModalOpen}
-              style={{ marginBottom: "20px" }}
-            >
-              Add New Record
-            </Button>
+            {localStorage.getItem("dept") === "Admin" ? (
+                <Button
+                variant="contained"
+                color="primary"
+                startIcon={<AddIcon />}
+                onClick={this.handleModalOpen}
+                style={{ marginBottom: "20px" }}
+              >
+                Add New Record
+              </Button>
+            ):<div></div>}
+          
           </div>
           {/* Modal with Box 1 contents */}
           <Modal open={this.state.modalOpen} onClose={this.handleModalClose}>

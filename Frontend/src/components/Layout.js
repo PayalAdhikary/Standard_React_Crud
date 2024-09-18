@@ -24,6 +24,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse"; 
 import CrudServices from "../Services/CrudServices";
 import { Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 const service = new CrudServices();
@@ -154,7 +155,9 @@ export default function Layout() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            React CRUD
+            <Link to="/dashboard" style={{ textDecoration: "none", color: "white" }}>
+            Home
+            </Link>
           </Typography>
           <Typography
             variant="h6"
