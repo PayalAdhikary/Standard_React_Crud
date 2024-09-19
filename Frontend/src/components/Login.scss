@@ -1,15 +1,50 @@
-.Login{
+.Login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f9fc;
+  }
+  
+  .Paper {
+    padding: 20px;
+    width: 300px;
     text-align: center;
-    width: 350px;
-    margin: 0 auto;
-    margin-top: 30px;
-
-    .Paper{
-        padding: 20px;
-
-        .Input{
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
+    border-radius: 10px;
+  }
+  
+  .avatar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-avatar {
+    width: 150px;
+    height: 150px;
+    border: 2px solid #e0e0e0;
+    background-color: #f0f0f0; // Adjust based on your profile picture needs
+  }
+  .profile-avatar img {
+    width: 100%;
+    height: 100%
+  }
+  .Input {
+    margin-bottom: 15px;
+  }
+  
+  .login-button {
+    background-color: #1976d2;
+    color: #fff;
+    text-transform: none;
+    &:hover {
+      background-color: #1565c0;
     }
-}
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 0.9em;
+  }
+  

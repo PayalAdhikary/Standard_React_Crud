@@ -10,6 +10,7 @@ import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar'; // Import for the profile picture
 import './Login.scss';
 import CrudServices from '../Services/CrudServices';
 
@@ -22,7 +23,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // Redirect to dashboard if already logged in (only run once on component mount)
   useEffect(() => {
     const token = localStorage.getItem('token');
     const dept = localStorage.getItem('dept');
@@ -30,10 +30,10 @@ const Login = () => {
     if (token && dept) {
       navigate('/dashboard');
     }
-  }, [navigate]); // Empty dependency array ensures this runs only once
+  }, [navigate]);
 
   const handleClickShowPassword = () => {
-    setShowPassword(prevState => !prevState);
+    setShowPassword((prevState) => !prevState);
   };
 
   const handleMouseDownPassword = (event) => {
@@ -54,16 +54,16 @@ const Login = () => {
 
     const data = {
       login_id: loginId,
-      password: password
+      password: password,
     };
 
     service.LoginRecord(data)
-      .then(response => {
+      .then((response) => {
         if (response.data.token) {
-          localStorage.setItem('token', response.data.token); // Store token
-          localStorage.setItem('dept', response.data.dept); // Store dept
-          localStorage.setItem('user_id', response.data.userId); // Store dept
-          navigate('/dashboard'); // Redirect to dashboard
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('dept', response.data.dept);
+          localStorage.setItem('user_id', response.data.userId);
+          navigate('/dashboard');
         } else {
           setError('Login failed. Please check your credentials.');
         }
@@ -76,10 +76,17 @@ const Login = () => {
   return (
     <div className="Login">
       <Paper elevation={3} className="Paper">
+        <div className="avatar-container">
+          <Avatar
+            alt="Profile Picture"
+            src="./images/user.png" // Replace with your actual profile image path
+            className="profile-avatar"
+          />
+        </div>
+
         <div className="Input">
           <TextField
-            id="standard-basic"
-            label="Enter Email"
+            label="Email"
             variant="standard"
             size="small"
             fullWidth
@@ -115,10 +122,12 @@ const Login = () => {
         </div>
 
         <div className="Input">
-          <Button variant="contained" onClick={handleClick}>Login</Button>
+          <Button variant="contained" onClick={handleClick} className="login-button">
+            Log In
+          </Button>
         </div>
 
-        {error && <p style={{ color: 'red' }}>{error}</p>} {/* Show error message */}
+        {error && <p className="error-message">{error}</p>}
       </Paper>
     </div>
   );
