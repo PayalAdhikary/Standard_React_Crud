@@ -299,11 +299,11 @@ export default class HomePage extends Component {
                 p: 4,
               }}
             >
-              <div className="Box1">
+              <div className="ModalBox">
                 <h3 style={{ textAlign: "center" }}>
                   {this.state.UpdateFlag ? "Edit User" : "Create User"}
                 </h3>
-                <div className="Input-Container">
+                <div className="Input-Container-Modal">
                   <div className="flex-Container">
                     <TextField
                       fullWidth
@@ -313,6 +313,7 @@ export default class HomePage extends Component {
                       variant="outlined"
                       value={this.state.name}
                       onChange={this.handleChange}
+                      
                     />
                   </div>
                   <div className="flex-Container">
@@ -326,7 +327,9 @@ export default class HomePage extends Component {
                       onChange={this.handleChange}
                     />
                   </div>
-                  <div className="flex-Container">
+                  </div>
+                  <div className="Input-Container-Modal">
+                  
                     <TextField
                       fullWidth
                       label="Mobile No."
@@ -336,10 +339,10 @@ export default class HomePage extends Component {
                       value={this.state.mobile}
                       onChange={this.handleChange}
                     />
-                  </div>
-                  <div className="flex-Container">
-                    <FormControl fullWidth size="small" variant="outlined">
-                      <Autocomplete
+                
+                  
+                    {/* <FormControl fullWidth size="small" variant="outlined" s> */}
+                      <Autocomplete fullWidth size="small" 
                         options={this.state.RoleDataRecord || []}
                         getOptionLabel={(option) => option.role || ""}
                         value={
@@ -366,8 +369,11 @@ export default class HomePage extends Component {
                           />
                         )}
                       />
-                    </FormControl>
+                    {/* </FormControl> */}
                   </div>
+                 
+
+                 
                   {/* Image Upload Section */}
                   <div className="flex-Container">
                     <label htmlFor="file-upload">
@@ -433,7 +439,7 @@ export default class HomePage extends Component {
                     </Button>
                   </div>
                 </div>
-              </div>
+             
             </Box>
           </Modal>
 

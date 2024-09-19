@@ -34,10 +34,15 @@
                 @extend .flexCenter;
                 flex-direction: column;
 
+                .row{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin: 10px 0;
+                }
 
                 .flex-Container{
-                    width: 80%;
-                    margin: 5px;
+                    width: 100%;
                 }
 
                 .flex-button{
@@ -122,4 +127,11 @@
             }
         }
     }
+}
+
+.Input-Container-Modal{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: auto;
 }
