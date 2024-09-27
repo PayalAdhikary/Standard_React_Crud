@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar'; // Import for the profile picture
 import './Login.scss';
 import CrudServices from '../Services/CrudServices';
+import { Link } from 'react-router-dom';
 
 const service = new CrudServices();
 
@@ -118,9 +119,10 @@ const Login = () => {
                 </InputAdornment>
               }
             />
+            <Link to="/forgetpassword" style={{ textDecoration: 'none', marginBottom: '10px', marginTop: '10px'}}>Forget Password?</Link>
           </FormControl>
         </div>
-
+              
         <div className="Input">
           <Button variant="contained" onClick={handleClick} className="login-button">
             Log In

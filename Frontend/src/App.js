@@ -7,14 +7,17 @@ import Layout from "./components/Layout"; // Import the Layout component
 import PrivateRoute from "./components/PrivateRoute";
 import ImageUpload from "./components/ImageUpload";
 import NotFound from "./components/NotFound";
+import ForgetPassword from "./components/ForgetPassword";
+import SignIn from "./components/SignIn";
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<Login />} />
-          <Route path="/image" element={<ImageUpload />} />
+          <Route path="/" element={<SignIn />} />
+          {/* <Route path="/" element={<Login />} /> */}
+          <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route element={<Layout />}>
             <Route path="/*" element={<NotFound />} />
           </Route>

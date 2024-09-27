@@ -12,6 +12,8 @@ import { styled } from "@mui/system";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { FormControl, Autocomplete } from "@mui/material";
+import { grey } from "@mui/material/colors";
+import { Padding } from "@mui/icons-material";
 
 const service = new CrudServices();
 
@@ -209,6 +211,7 @@ export default class HomePage extends Component {
       mobile: "",
       img: "",
       role_id: "",
+      preview: null,
       UpdateFlag: false,
       modalOpen: false,
     });
@@ -273,7 +276,7 @@ export default class HomePage extends Component {
         <div className="SubContainer">
           <div className="flex-Container">
             {localStorage.getItem("dept") === "Admin" ? (
-                <Button
+              <Button
                 variant="contained"
                 color="primary"
                 startIcon={<AddIcon />}
@@ -282,8 +285,9 @@ export default class HomePage extends Component {
               >
                 Add New Record
               </Button>
-            ):<div></div>}
-          
+            ) : (
+              <div></div>
+            )}
           </div>
           {/* Modal with Box 1 contents */}
           <Modal open={this.state.modalOpen} onClose={this.handleModalClose}>
@@ -297,12 +301,15 @@ export default class HomePage extends Component {
                 bgcolor: "background.paper",
                 boxShadow: 24,
                 p: 4,
+                borderRadius: "10px",
               }}
             >
               <div className="ModalBox">
-                <h3 style={{ textAlign: "center" }}>
+                <div className="Header" style={{ textAlign: "center" ,background: "#4F75FF", height: "50px",borderRadius:"10px"}}>
+                <h3 style={{ textAlign: "center",padding:"10px" ,color:"white"}}>
                   {this.state.UpdateFlag ? "Edit User" : "Create User"}
                 </h3>
+                </div>
                 <div className="Input-Container-Modal">
                   <div className="flex-Container">
                     <TextField
@@ -313,7 +320,6 @@ export default class HomePage extends Component {
                       variant="outlined"
                       value={this.state.name}
                       onChange={this.handleChange}
-                      
                     />
                   </div>
                   <div className="flex-Container">
@@ -327,9 +333,9 @@ export default class HomePage extends Component {
                       onChange={this.handleChange}
                     />
                   </div>
-                  </div>
-                  <div className="Input-Container-Modal">
-                  
+                </div>
+                <div className="Input-Container-Modal">
+                  <div className="flex-Container">
                     <TextField
                       fullWidth
                       label="Mobile No."
@@ -339,107 +345,118 @@ export default class HomePage extends Component {
                       value={this.state.mobile}
                       onChange={this.handleChange}
                     />
-                
-                  
-                    {/* <FormControl fullWidth size="small" variant="outlined" s> */}
-                      <Autocomplete fullWidth size="small" 
-                        options={this.state.RoleDataRecord || []}
-                        getOptionLabel={(option) => option.role || ""}
-                        value={
-                          this.state.RoleDataRecord.find(
-                            (role) => role.id === this.state.role_id
-                          ) || null
-                        }
-                        onChange={(event, newValue) => {
-                          if (newValue) {
-                            this.setState({
-                              role_id: newValue.id,
-                              role: newValue.role,
-                            });
-                          } else {
-                            this.setState({ role_id: "", role: "" });
-                          }
-                        }}
-                        renderInput={(params) => (
-                          <TextField
-                            size="small"
-                            {...params}
-                            label="Department"
-                            variant="outlined"
-                          />
-                        )}
-                      />
-                    {/* </FormControl> */}
                   </div>
-                 
 
-                 
-                  {/* Image Upload Section */}
-                  <div className="flex-Container">
-                    <label htmlFor="file-upload">
-                      <VisuallyHiddenInput
-                        id="file-upload"
-                        type="file"
-                        accept="image/*"
-                        onChange={this.handleFileChange}
+                  {/* <FormControl fullWidth size="small" variant="outlined" s> */}
+                  <Autocomplete
+                    fullWidth
+                    size="small"
+                    className="flex-Container"
+                    options={this.state.RoleDataRecord || []}
+                    getOptionLabel={(option) => option.role || ""}
+                    value={
+                      this.state.RoleDataRecord.find(
+                        (role) => role.id === this.state.role_id
+                      ) || null
+                    }
+                    onChange={(event, newValue) => {
+                      if (newValue) {
+                        this.setState({
+                          role_id: newValue.id,
+                          role: newValue.role,
+                        });
+                      } else {
+                        this.setState({ role_id: "", role: "" });
+                      }
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        size="small"
+                        {...params}
+                        label="Department"
+                        variant="outlined"
                       />
+                    )}
+                  />
+                  {/* </FormControl> */}
+                </div>
+
+                {/* Image Upload Section */}
+                <div className="flex-Container">
+                  <label htmlFor="file-upload">
+                    <VisuallyHiddenInput
+                      id="file-upload"
+                      type="file"
+                      accept="image/*"
+                      onChange={this.handleFileChange}
+                    />
+                    <Button
+                      variant="contained"
+                      component="span"
+                      startIcon={<CloudUploadIcon />}
+                      style={{ marginTop: "5px", marginBottom: "10px" }}
+                      size="small"
+                    >
+                      Choose Image
+                    </Button>
+                  </label>
+                </div>
+                {/* Preview Image Before Upload */}
+                {this.state.preview && (
+                  <ImagePreviewContainer>
+                    <ImagePreview
+                      src={this.state.preview}
+                      alt="Selected Preview"
+                    />
+                    <FileDetails>
                       <Button
                         variant="contained"
-                        component="span"
-                        startIcon={<CloudUploadIcon />}
+                        color="primary"
+                        onClick={this.handleUpload}
                         style={{ marginTop: "5px", marginBottom: "10px" }}
+                        size="small"
                       >
-                        Choose Image
+                        Upload Image
                       </Button>
-                    </label>
-                  </div>
-                  {/* Preview Image Before Upload */}
-                  {this.state.preview && (
-                    <ImagePreviewContainer>
-                      <ImagePreview
-                        src={this.state.preview}
-                        alt="Selected Preview"
-                      />
-                      <FileDetails>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          onClick={this.handleUpload}
-                          style={{ marginTop: "5px", marginBottom: "10px" }}
-                        >
-                          Upload Image
-                        </Button>
-                      </FileDetails>
-                    </ImagePreviewContainer>
-                  )}
-                  {/* Uploaded Image After API Upload */}
+                    </FileDetails>
+                  </ImagePreviewContainer>
+                )}
+                {/* Uploaded Image After API Upload */}
 
-                  {!this.state.preview && this.state.img && (
-                    <ImagePreviewContainer>
-                      <ImagePreview src={this.state.img} alt="Uploaded Image" />
-                      {/* <p>Profile photo set successfully!</p> */}
-                    </ImagePreviewContainer>
-                  )}
-                  {/* Save/Cancel Buttons */}
-                  <div className="Button-Container">
-                    <Button
-                      variant="contained"
-                      color="success"
-                      onClick={this.handleClick}
-                      style={{ marginRight: "10px" }}
-                    >
-                      Save
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="error"
-                      onClick={this.handleModalClose}
-                    >
-                      Cancel
-                    </Button>
-                  </div>
+                {!this.state.preview && this.state.img && (
+                  <ImagePreviewContainer>
+                    <ImagePreview src={this.state.img} alt="Uploaded Image" />
+                    {/* <p>Profile photo set successfully!</p> */}
+                  </ImagePreviewContainer>
+                )}
+                {/* Save/Cancel Buttons */}
+                <div
+                  className="Button-Container"
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    marginTop: "20px",
+                  }}
+                >
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.handleClick}
+                    style={{ marginRight: "10px" }}
+                    size="small"
+                  >
+                    Save
+                  </Button>
+                  <Button
+                    variant="contained"
+                    style={{ color: "white", background: "gray" }}
+                    onClick={this.handleModalClose}
+                    size="small"
+                  >
+                    Cancel
+                  </Button>
                 </div>
-             
+              </div>
             </Box>
           </Modal>
 

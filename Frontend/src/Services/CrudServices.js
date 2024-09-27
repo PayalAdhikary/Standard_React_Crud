@@ -10,6 +10,10 @@ export default class CrudServices  {
     return axios.post(Configuration.LoginRecord, data, false);
   }
 
+  ForgetPassword(data) {
+    console.log("Data: " + JSON.stringify(data) + " | URL: " + Configuration.ForgetPassword);
+    return axios.post(Configuration.ForgetPassword, data, false);
+  }
   ImageUpload(formData) {
     return axios.filePost(Configuration.FileUpload, formData, {
       headers: {

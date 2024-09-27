@@ -7,5 +7,6 @@ module.exports = {
     MenuRecord : "https://localhost:44306/api/Menu",
     SubMenuRecord : "https://localhost:44306/api/Menu/submenu",
     FileUpload : "https://localhost:44306/api/File/upload",
-    GetRole : "https://localhost:44306/api/User/role"
+    GetRole : "https://localhost:44306/api/User/role",
+    ForgetPassword : "https://localhost:44306/api/Crud/forgot-password"
 }
